@@ -6,7 +6,7 @@
   "plugins": [
     {
       "name": "swift-agent-subagents",
-      "source": ".",
+      "source": "./",
       "version": "1.0.0",
       "description": "Specialized Swift/SwiftUI agents that enforce the Ravn Way — MVVM + SOA, @Observable, Swift Testing, constructor injection."
     }
