@@ -34,20 +34,23 @@ Agents do **not** embed static copies of skill rules. Instead, each agent's firs
 **Step 1** — Register both repos as plugin marketplaces:
 
 ```
-/plugin marketplace add Josepo616/swift-agent-skills
-/plugin marketplace add Josepo616/swift-agent-subagents
+/plugin marketplace add git@github.com:Josepo616/swift-agent-skills.git
+/plugin marketplace add git@github.com:Josepo616/swift-agent-subagents.git
 ```
+
+> **Note:** If you have HTTPS auth configured (e.g., via `gh auth login`), you can use the shorthand instead:
+> `/plugin marketplace add Josepo616/swift-agent-skills`
 
 **Step 2** — Install the skills (knowledge layer):
 
 ```
-/plugin install swift-agent-skills@Josepo616/swift-agent-skills
+/plugin install swift-agent-skills@swift-agent-skills
 ```
 
 **Step 3** — Install the agents (action layer):
 
 ```
-/plugin install swift-agent-subagents@Josepo616/swift-agent-subagents
+/plugin install swift-agent-subagents@swift-agent-subagents
 ```
 
 ### Option B — Load from local directories (for development/testing)
@@ -99,7 +102,8 @@ Every agent enforces these non-negotiable defaults:
 ```
 swift-agent-subagents/
 ├── .claude-plugin/
-│   └── plugin.json               # Plugin metadata for distribution
+│   ├── plugin.json               # Plugin metadata for distribution
+│   └── marketplace.json          # Marketplace catalog for /plugin install
 ├── agents/                        # Specialized agents
 │   ├── feature-architect.md       # /feature-architect <name>
 │   ├── code-reviewer.md           # /code-reviewer <path>
