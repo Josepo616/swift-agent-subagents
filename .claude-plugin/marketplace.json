@@ -1,11 +1,14 @@
 {
   "name": "swift-agent-subagents",
-  "version": "1.0.0",
-  "plugins": {
-    "swift-agent-subagents": {
-      "path": ".",
+  "owner": {
+    "name": "Josepo616"
+  },
+  "plugins": [
+    {
+      "name": "swift-agent-subagents",
+      "source": ".",
       "version": "1.0.0",
       "description": "Specialized Swift/SwiftUI agents that enforce the Ravn Way — MVVM + SOA, @Observable, Swift Testing, constructor injection."
     }
-  }
+  ]
 }
