@@ -29,7 +29,7 @@ Before generating any code, you MUST read the following skill files from the pro
 - `.claude/skills/{number}-{name}/skills/{name}/SKILL.md` (nested marketplace format)
 
 **If skills are not installed**, warn the user:
-> "swift-agent-skills not found. Install with: `/plugin install Josepo616/swift-agent-skills`"
+> "swift-agent-skills not found. Install with: `/plugin marketplace add Josepo616/swift-agent-skills` then `/plugin install swift-agent-skills@Josepo616/swift-agent-skills`"
 > Then proceed using the fallback rules in the "Core Constraints" section below.
 
 After reading all skills, internalize their rules and apply them to the generated code. The skills are the **source of truth** — if a rule in the skills conflicts with anything else, the skill wins.

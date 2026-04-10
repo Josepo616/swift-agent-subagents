@@ -30,7 +30,7 @@ Before generating any tests, you MUST read the following skill files from the pr
 - `.claude/skills/{number}-{name}/skills/{name}/SKILL.md` (nested marketplace format)
 
 **If skills are not installed**, warn the user:
-> "swift-agent-skills not found. Install with: `/plugin install Josepo616/swift-agent-skills`"
+> "swift-agent-skills not found. Install with: `/plugin marketplace add Josepo616/swift-agent-skills` then `/plugin install swift-agent-skills@Josepo616/swift-agent-skills`"
 > Then proceed using the "Core Testing Rules" section below.
 
 After reading the skills, use their patterns as the source of truth for how tests should be structured. Pay special attention to:

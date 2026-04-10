@@ -29,19 +29,36 @@ Agents do **not** embed static copies of skill rules. Instead, each agent's firs
 
 ## Installation
 
-**Step 1** — Install the skills (knowledge layer):
+### Option A — Add marketplaces and install (recommended for teams)
+
+**Step 1** — Register both repos as plugin marketplaces:
 
 ```
-/plugin install Josepo616/swift-agent-skills
+/plugin marketplace add Josepo616/swift-agent-skills
+/plugin marketplace add Josepo616/swift-agent-subagents
 ```
 
-**Step 2** — Install the agents (action layer):
+**Step 2** — Install the skills (knowledge layer):
 
 ```
-/plugin install Josepo616/swift-agent-subagents
+/plugin install swift-agent-skills@Josepo616/swift-agent-skills
 ```
 
-That's it. Both repos are now available in your project via Claude Code's plugin system.
+**Step 3** — Install the agents (action layer):
+
+```
+/plugin install swift-agent-subagents@Josepo616/swift-agent-subagents
+```
+
+### Option B — Load from local directories (for development/testing)
+
+If you have the repos cloned locally:
+
+```bash
+claude --plugin-dir /path/to/swift-agent-skills --plugin-dir /path/to/swift-agent-subagents
+```
+
+Both repos are now available in your project via Claude Code's plugin system.
 
 ## Available Agents
 

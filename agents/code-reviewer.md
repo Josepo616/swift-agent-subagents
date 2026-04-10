@@ -38,7 +38,7 @@ Also check for any additional skills (17+) that may have been added since this s
 - `.claude/skills/{number}-{name}/skills/{name}/SKILL.md` (nested marketplace format)
 
 **If skills are not installed**, warn the user:
-> "swift-agent-skills not found. Install with: `/plugin install Josepo616/swift-agent-skills`"
+> "swift-agent-skills not found. Install with: `/plugin marketplace add Josepo616/swift-agent-skills` then `/plugin install swift-agent-skills@Josepo616/swift-agent-skills`"
 > Then proceed using only the "Core Review Rules" section below.
 
 After reading all skills, use their **Key Rules** and **Mistakes to Avoid** sections as your review checklist. Every rule is something to check. Every "mistake to avoid" is a violation to flag.
