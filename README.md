@@ -1,49 +1,57 @@
 # Swift Agent Subagents
 
-Claude Code subagents that perform real work on Swift/SwiftUI codebases following **Ravn's architecture**.
+Claude Code agents that perform real work on Swift/SwiftUI codebases following **Ravn's architecture**.
 
-These subagents are the **Action Layer** — they dynamically load rules from [swift-agent-skills](https://github.com/Josepo616/swift-agent-skills) at runtime and apply them as composed, automated workflows.
+These agents are the **Action Layer** — they dynamically load rules from [swift-agent-skills](https://github.com/Josepo616/swift-agent-skills) at runtime and apply them as composed, automated workflows.
 
 ## Architecture
 
 ```
 swift-agent-subagents (ACTION LAYER)
-  Performs work on codebases. Loads skills at runtime for latest rules.
+  Specialized agents that think and develop. Loads skills at runtime for latest rules.
   ▼ reads at runtime
 swift-agent-skills (KNOWLEDGE LAYER)
-  Teaches Claude best practices. 16+ skills as SKILL.md files.
+  Source of truth for best practices. 16+ skills as SKILL.md files.
   Installed at: .claude/skills/{NN}-{name}/SKILL.md
 ```
 
-**Skills** = passive knowledge ("here's how to do X correctly")
-**Subagents** = active executors ("do X for me, correctly, the Ravn way")
+**Skills** = source of truth ("here's how to do X correctly")
+**Agents** = specialized executors ("do X for me, correctly, the Ravn way")
 
 ### Dynamic Skill Loading
 
-Subagents do **not** embed static copies of skill rules. Instead, each subagent's first step is to **read the SKILL.md files** from the project's installed `swift-agent-skills`. This means:
+Agents do **not** embed static copies of skill rules. Instead, each agent's first step is to **read the SKILL.md files** from the project's installed `swift-agent-skills`. This means:
 
-- Updating a skill in `swift-agent-skills` **automatically updates** what subagents enforce
+- Updating a skill in `swift-agent-skills` **automatically updates** what agents enforce
 - No manual sync between repos needed
-- Subagents always use the **latest version** of the rules
-- If skills aren't installed, subagents fall back to core constraints and warn the user
+- Agents always use the **latest version** of the rules
+- If skills aren't installed, agents fall back to core constraints and warn the user
 
-## Prerequisites
+## Installation
 
-Install `swift-agent-skills` in your project first:
+**Step 1** — Install the skills (knowledge layer):
 
-```bash
-/install-plugin Josepo616/swift-agent-skills
+```
+/plugin install Josepo616/swift-agent-skills
 ```
 
-## Available Subagents
+**Step 2** — Install the agents (action layer):
+
+```
+/plugin install Josepo616/swift-agent-subagents
+```
+
+That's it. Both repos are now available in your project via Claude Code's plugin system.
+
+## Available Agents
 
 ### Tier 1: High Impact
 
-| Command | Purpose | Skills Loaded |
-|---------|---------|---------------|
-| `/scaffold-feature <name>` | Generate a complete feature module (Model, Service, ViewModel, View, Tests) | 01, 04, 05, 06, 07, 09, 10, 13, 15 |
-| `/swift-review <path>` | Review Swift code against all Ravn conventions | ALL (01-16+) |
-| `/gen-tests <path>` | Generate Swift Testing tests for existing code | 10, 15, 07 + optional 01, 03, 06, 09 |
+| Agent | Purpose | Skills Loaded |
+|-------|---------|---------------|
+| `/feature-architect <name>` | Architects a complete feature module (Model, Service, ViewModel, View, Tests) | 01, 04, 05, 06, 07, 09, 10, 13, 15 |
+| `/code-reviewer <path>` | Reviews Swift code against all Ravn conventions | ALL (01-16+) |
+| `/test-engineer <path>` | Engineers comprehensive Swift Testing test suites | 10, 15, 07 + optional 01, 03, 06, 09 |
 
 ### Tier 2: Strong Additions (Coming Soon)
 
@@ -56,7 +64,7 @@ Install `swift-agent-skills` in your project first:
 
 ## The Ravn Way
 
-Every subagent enforces these non-negotiable defaults:
+Every agent enforces these non-negotiable defaults:
 
 | Decision | The Ravn Way |
 |----------|-------------|
@@ -69,28 +77,20 @@ Every subagent enforces these non-negotiable defaults:
 | Feature structure | Model / Service / ViewModel / View folders |
 | State modeling | `Loadable<T>` enum (idle/loading/loaded/failed) |
 
-## Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/Josepo616/swift-agent-subagents
-
-# Copy commands into your project
-cp -r swift-agent-subagents/.claude/commands/ your-project/.claude/commands/
-```
-
 ## Project Structure
 
 ```
 swift-agent-subagents/
+├── .claude-plugin/
+│   └── plugin.json               # Plugin metadata for distribution
+├── agents/                        # Specialized agents
+│   ├── feature-architect.md       # /feature-architect <name>
+│   ├── code-reviewer.md           # /code-reviewer <path>
+│   └── test-engineer.md           # /test-engineer <path>
 ├── .claude/
-│   ├── commands/                  # User-invocable subagents
-│   │   ├── scaffold-feature.md    # /scaffold-feature <name>
-│   │   ├── swift-review.md        # /swift-review <path>
-│   │   └── gen-tests.md           # /gen-tests <path>
 │   └── subagents-project-spec.md  # Project specification
 ├── knowledge/
-│   └── skill-reference-map.md     # Maps skills to subagent dependencies
+│   └── skill-reference-map.md     # Maps skills to agent dependencies
 ├── README.md
 └── LICENSE
 ```
